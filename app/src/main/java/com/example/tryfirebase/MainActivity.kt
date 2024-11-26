@@ -2,7 +2,6 @@ package com.example.tryfirebase
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
@@ -56,6 +55,24 @@ class MainActivity : AppCompatActivity() {
             TambahData(db, _etProvinsi.text.toString(), _etIbuKota.text.toString())
         }
 
+        // delete data
+        _lvProvinsi.setOnItemLongClickListener { parent, view, position, id ->
+            val namaPro = data[position].get("Pro")
+            if (namaPro != null) {
+                db.collection("tbProvinsi")
+                    .document(namaPro)
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d("Firebase", "Data Berhasil Dihapus")
+                    }
+                    .addOnFailureListener {
+                        Log.d("Firebase", it.message.toString())
+                    }
+                readData(db)
+            }
+            true
+        }
+
         // read data
         readData(db)
     }
@@ -64,7 +81,8 @@ class MainActivity : AppCompatActivity() {
     fun TambahData(db: FirebaseFirestore, Provinsi: String, IbuKota: String) {
         val dataBaru = daftarProvinsi(Provinsi, IbuKota)
         db.collection("tbProvinsi")
-            .add(dataBaru)
+            .document(dataBaru.provinsi)
+            .set(dataBaru)
             .addOnSuccessListener {
                 _etProvinsi.setText("")
                 _etIbuKota.setText("")
@@ -73,6 +91,7 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d("Firebase", it.message.toString())
             }
+        readData(db)
     }
 
     fun readData(db: FirebaseFirestore) {
