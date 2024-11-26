@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "256766492026",
+    "project_id": "tryfirebase-e2820",
+    "storage_bucket": "tryfirebase-e2820.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256766492026:android:f573abcfc39aeb60eceac3",
+        "android_client_info": {
+          "package_name": "com.example.tryfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMlMUwKomj7BhPEaRLy-R2T1Uo7E8QPZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
